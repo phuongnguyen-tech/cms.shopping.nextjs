@@ -13,65 +13,59 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
 import { useRouter } from 'next/navigation'
+import LogoutButton from '../logout/page'
+import { Category, LocalMall, Person, ShoppingBasket, ShoppingCart } from '@mui/icons-material'
 
 const drawerWidth = 240
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const router = useRouter()
+    const router = useRouter()
 
-  function handleChangePage(route: any) {
-    console.log(route!.text)
+    function handleChangePage(link: string) {
+        router.push(`/admin/${link}`)
+    }
 
-    router.push(`/admin/${route!.text}`)
-  }
-
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Phuong dap chai
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        sx={{
-          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
-        }}
-      >
-        <Toolbar />
-        <Box sx={{ overflow: 'auto' }}>
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['products', 'users', 'categories'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton onClick={() => handleChangePage({ text })}>
-                  <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+                <Toolbar className="flex justify-between">
+                    <Typography variant="h6" noWrap component="div">
+                        Phuong dap chai
+                    </Typography>
+                    <LogoutButton />
+                </Toolbar>
+            </AppBar>
+            <Drawer
+                variant="permanent"
+                sx={{
+                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+                }}>
+                <Toolbar />
+                <Box sx={{ overflow: 'auto' }}>
+                    <List>
+                        {[
+                            { text: 'products', icon: <LocalMall /> },
+                            { text: 'customers', icon: <Person /> },
+                            { text: 'categories', icon: <Category /> },
+                            { text: 'orders', icon: <ShoppingCart /> },
+                            { text: 'orderDetails', icon: <ShoppingBasket /> },
+                        ].map((item, index) => (
+                            <ListItem key={item.text} disablePadding>
+                                <ListItemButton onClick={() => handleChangePage(item.text)}>
+                                    <ListItemIcon>{item.icon}</ListItemIcon>
+                                    <ListItemText className="capitalize" primary={item.text} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                    <Divider />
+                </Box>
+            </Drawer>
+            <Box component="section" sx={{ marginTop: 8, marginLeft: 32 }}>
+                {children}
+            </Box>
         </Box>
-      </Drawer>
-      <Box component="section" sx={{ marginTop: 8, marginLeft: 10 }}>
-        {children}
-      </Box>
-    </Box>
-  )
+    )
 }

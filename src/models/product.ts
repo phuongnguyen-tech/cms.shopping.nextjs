@@ -1,18 +1,15 @@
 interface IProduct {
-  id: string
-  name: string
-  description?: string
-  price: number
-  categoryId?: string
-  bannerUrl: string
-  slug: string
+    id: string
+    name: string
+    description?: string
+    price: number
+    bannerUrl: string
+    quantity: number
+    categoryId?: string
+    createdAt: string
 }
 
-interface ProductForm {
-  name: string
-  description?: string
-  price: number
-  categoryId?: string
-  bannerUrl: string
-  slug: string
+interface Product {
+    id: string
+    name: string
 }

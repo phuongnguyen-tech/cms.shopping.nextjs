@@ -1,9 +1,10 @@
 interface ICategory {
-  id: string
-  name: string
-  products?: any
+    id: string
+    name: string
+    createdAt: string
 }
 
-interface CategoryForm {
-  name: string
+interface Category {
+    id: string
+    name: string
 }
