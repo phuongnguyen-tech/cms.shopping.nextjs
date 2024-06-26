@@ -19,11 +19,11 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { baseUrl } from '@/utils/baseUrl'
 import productApiRequest from '@/apiServices/product/route'
-import AddProduct from './create/page'
-import EditProduct from './[id]/update/page'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded'
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded'
+import AddProduct from '@/components/products/create'
+import EditProduct from '@/components/products/update'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -175,4 +175,4 @@ function Product() {
     )
 }
 
-export default withAuth(Product)
+export default Product
