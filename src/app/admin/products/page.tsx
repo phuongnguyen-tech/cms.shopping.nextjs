@@ -14,16 +14,15 @@ import {
     TextField,
 } from '@mui/material'
 import useSWR from 'swr'
-import { withAuth } from '@/utils/withAuth'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { baseUrl } from '@/utils/baseUrl'
 import productApiRequest from '@/apiServices/product/route'
-import AddProduct from './create/page'
-import EditProduct from './[id]/update/page'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded'
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded'
+import EditProduct from '@/components/products/update/page'
+import AddProduct from '@/components/products/create/page'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -175,4 +174,4 @@ function Product() {
     )
 }
 
-export default withAuth(Product)
+export default Product

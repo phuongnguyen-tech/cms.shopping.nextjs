@@ -586,9 +586,6 @@ video {
 .mt-3 {
   margin-top: 0.75rem;
 }
-.mt-2 {
-  margin-top: 0.5rem;
-}
 .mt-4 {
   margin-top: 1rem;
 }
@@ -621,9 +618,6 @@ video {
 }
 .border {
   border-width: 1px;
-}
-.p-4 {
-  padding: 1rem;
 }
 .py-4 {
   padding-top: 1rem;

@@ -14,7 +14,6 @@ import {
     TextField,
 } from '@mui/material'
 import useSWR from 'swr'
-import { withAuth } from '@/utils/withAuth'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { baseUrl } from '@/utils/baseUrl'
@@ -93,7 +92,8 @@ function Order() {
                                 <TableCell className="font-medium">status</TableCell>
                                 <TableCell className="font-medium">Customer</TableCell>
                                 <TableCell className="font-medium">Order Date</TableCell>
-                                <TableCell className="font-medium">total Amount</TableCell>
+                                <TableCell className="font-medium">Total Amount</TableCell>
+                                <TableCell className="font-medium">Created At</TableCell>
                                 <TableCell className="font-medium">Action</TableCell>
                             </TableRow>
                         </TableHead>
@@ -163,4 +163,4 @@ function Order() {
     )
 }
 
-export default withAuth(Order)
+export default Order

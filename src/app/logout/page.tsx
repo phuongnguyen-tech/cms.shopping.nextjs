@@ -1,16 +1,15 @@
 'use client'
 
-import { logoutAdmin } from '@/utils/auth'
-import { useRouter } from 'next/navigation'
+import { logoutAdmin } from '@/apiServices/login/route'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Button } from '@mui/material'
+import { useRouter } from 'next/navigation'
 
 const LogoutButton = () => {
     const router = useRouter()
-
     const handleLogout = async () => {
         await logoutAdmin()
-        router.push('/login') // Chuyển hướng về trang đăng nhập sau khi đăng xuất
+        router.push('/login')
     }
 
     return (

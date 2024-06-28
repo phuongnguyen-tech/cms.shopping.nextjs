@@ -9,13 +9,13 @@ import { useForm } from 'react-hook-form'
 function ProdDetail({ params }: { params: { id: string } }) {
     const router = useRouter()
     const { id } = params
+    const [prod, setProd] = useState<IProduct | null>(null)
     const {
         register,
         handleSubmit,
-        setValue,
+        reset,
         formState: { errors },
     } = useForm<IProduct>()
-    const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
@@ -23,29 +23,25 @@ function ProdDetail({ params }: { params: { id: string } }) {
             try {
                 const prodData = await productApiRequest.getDetail(id)
                 const prod = Array.isArray(prodData) ? prodData[0] : prodData
-                setValue('id', prod.id)
-                setValue('bannerUrl', prod.bannerUrl)
-                setValue('name', prod.name)
-                setValue('price', prod.price)
-                setValue('quantity', prod.quantity)
-                setValue('description', prod.description ?? '')
-                setValue('categoryId', prod.categoryId ?? '')
-                setValue('createdAt', prod.createdAt ?? '')
+                setProd(prod)
+                reset({
+                    ...prod,
+                })
             } catch (error) {
-                setError('Failed to fetch product data')
-            } finally {
-                setLoading(false)
+                console.log('Error: ', error)
             }
         }
 
-        fetchProduct()
-    }, [id, setValue])
+        if (id) {
+            fetchProduct()
+        }
+    }, [id, reset])
 
     const onSubmit = async (data: IProduct) => {
         console.log(data)
     }
 
-    if (loading) {
+    if (!prod) {
         return <CircularProgress />
     }
 
